@@ -39,6 +39,92 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 
 <body>
+<body>
+
+  <!-- Your Form -->
+  <form id="contactForm">
+
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+
+    <button type="submit">Submit</button>
+
+  </form>
+
+  <!-- DataLayer (IMPORTANT) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <!-- 🔥 ALL JAVASCRIPT HERE -->
+  <script>
+
+  // FORM LOAD
+  window.addEventListener("load", function () {
+    dataLayer.push({ event: "form_load" });
+  });
+
+  // FORM START
+  document.getElementById("contactForm").addEventListener("focusin", function () {
+    dataLayer.push({ event: "form_start" });
+  });
+
+  // ✅ VALIDATION + SUBMIT
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+
+    if (name === "" || email === "") {
+
+      // ❌ ERROR EVENT
+      dataLayer.push({
+        event: "form_error"
+      });
+
+      e.preventDefault(); // STOP form submission
+
+    } else {
+
+      // ✅ SUCCESS EVENT
+      dataLayer.push({
+        event: "form_success"
+      });
+
+    }
+
+  });
+
+  </script>
+
+</body>
+<script>
+
+// FORM LOAD EVENT
+window.addEventListener("load", function () {
+  dataLayer.push({
+    event: "form_load",
+    form_name: "contact_form"
+  });
+});
+
+// FORM START (when user clicks inside form)
+document.getElementById("contactForm").addEventListener("focusin", function () {
+  dataLayer.push({
+    event: "form_start",
+    form_name: "contact_form"
+  });
+});
+
+// FORM SUBMIT
+document.getElementById("contactForm").addEventListener("submit", function () {
+  dataLayer.push({
+    event: "form_submit",
+    form_name: "contact_form"
+  });
+});
+
+</script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6LTLPKW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -81,6 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="navbar-nav ms-auto">
                         <a href="#" class="nav-item nav-link active">Home</a>
                         <a href="#" class="nav-item nav-link">About</a>
+			<a href="/form.html" class="nav-item nav-link">Form</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
                             <div class="dropdown-menu bg-light mt-2">
@@ -449,6 +536,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+	
+	
+
+
 </body>
 
 </html>
